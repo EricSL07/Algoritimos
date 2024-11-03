@@ -6,18 +6,18 @@
 #include <stdlib.h>
 
 int** transpose(int m, int n, int v[m][n]){
-    int** v2 = (int**) malloc(m * sizeof(int));
+    int** v2 = (int**) malloc(n * sizeof(int*));
 
     for (int i = 0; i < n; i++)
     {
-        v2[i] = malloc(n * sizeof(int));
+        v2[i] = (int*) malloc(m * sizeof(int));
     }
 
     for (int i = 0; i < m; i++)
     {
         for (int j = 0; j < n; j++)
         {
-            v2[i][j] = v[j][i];
+            v2[j][i] = v[i][j];
         }
         
     }
@@ -26,11 +26,11 @@ int** transpose(int m, int n, int v[m][n]){
 }
 
 int main(){
-    int v[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    int v[3][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}};
 
-    int** v2 = transpose(3, 3, v);
+    int** v2 = transpose(3, 4, v);
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 3; j++)
         {
@@ -41,7 +41,7 @@ int main(){
         
     }
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         free(v2[i]);
     }
@@ -50,5 +50,3 @@ int main(){
 
     return 0;
 }
-
-// 1 4 7
